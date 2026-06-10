@@ -7,7 +7,10 @@ load_dotenv()
 app = FastAPI()
 
 def _handle():
-    mac_list = [mac.strip() for mac in os.getenv("MAC_ADDRESSES").split(",") if mac.strip()]
+    raw_addresses = os.getenv("MAC_ADDRESSES")
+    if not raw_addresses:
+        raise Exception("MAC_ADDRESSES env variable not set")
+    mac_list = [mac.strip() for mac in raw_addresses.split(",") if mac.strip()]
     for mac in mac_list:
         wollib.wake(mac)
 
