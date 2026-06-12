@@ -2,6 +2,7 @@ import os
 import wollib
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import HTMLResponse
 
 load_dotenv()
 app = FastAPI()
@@ -22,7 +23,9 @@ async def wake_endpoint():
     except Exception as e:
         raise HTTPException(500, str(e))
 
-
+@app.get("/", response_class=HTMLResponse)
+async def web():
+    return HTMLResponse(content=open("index.html").read())
 
 if __name__ == "__main__":
     _handle()
