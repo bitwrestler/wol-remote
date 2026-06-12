@@ -6,3 +6,5 @@ services:
       - "6020:8090"
     restart: unless-stopped
     network_mode: host # Critical: enables proper UDP broadcast on Linux
+
+  #TODO map .env file
