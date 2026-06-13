@@ -5,5 +5,5 @@ RUN pip install --no-cache-dir -r requirements.txt fastapi uvicorn gunicorn
 COPY wol-remote.py .
 COPY wollib ./wollib
 COPY index.html .
-EXPOSE 8090
-CMD ["uvicorn", "wol-remote:app", "--host", "0.0.0.0", "--port", "8090"]
+EXPOSE 6020
+CMD ["uvicorn", "wol-remote:app", "--host", "0.0.0.0", "--port", "6020"]
