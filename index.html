@@ -25,10 +25,15 @@ const btn = document.getElementById('btn');
 const status = document.getElementById('status');
 btn.onclick = async () => {
   btn.disabled = true; btn.textContent = "Sending..."; status.textContent = "";
-  try {
-    await fetch('/api/wake', {method:'POST', headers:{'Content-Type':'application/json'}});
-    status.textContent = "✅ Packet sent. GPU will initialize in ~10-20s.";
-  } catch(e) { status.textContent = "❌ Failed: " + e.message; }
+      try {
+        const response = await fetch('/api/wake', {method:'POST', headers:{'Content-Type':'application/json'}});
+        const data = await response.json();
+        if (data.status === "skipped") {
+          status.textContent = "⏳ Request skipped because it was just sent.";
+        } else {
+          status.textContent = "✅ Packet sent. GPU will initialize in ~10-20s.";
+        }
+      } catch(e) { status.textContent = "❌ Failed: " + e.message; }
   btn.disabled = false; btn.textContent = "Wake Now";
 };
 </script>
