@@ -1,8 +1,6 @@
 services:
   wol-remote:
     image: "wol-remote:latest"
-    ports:
-      - "6020:8090"
     volumes:
       - ./.env:/app/.env
     restart: unless-stopped
