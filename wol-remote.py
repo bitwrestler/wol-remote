@@ -15,7 +15,7 @@ def _handle():
     for mac in mac_list:
         wollib.wake(mac)
 
-@app.get("/api/wake")
+@app.api_route("/api/wake", methods=["GET", "POST"])
 async def wake_endpoint():
     try:
         _handle()
